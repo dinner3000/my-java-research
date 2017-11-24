@@ -2,3 +2,6 @@
 .project
 .jsdtscope
 .settings
+.idea
+*.iml
+target
