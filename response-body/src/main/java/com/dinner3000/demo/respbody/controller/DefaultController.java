@@ -27,7 +27,7 @@ public class DefaultController {
 
     @RequestMapping("getInfo")
     public @ResponseBody Object getInfo(){
-        System.out.println("###before return");
+        System.out.println("###DefaultController - getInfo()");
         return new Info();
     }
 

@@ -1,5 +1,6 @@
 package com.dinner3000.demo.respbody.advice;
 
+import com.dinner3000.demo.respbody.model.Info;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -19,7 +20,7 @@ import java.util.Map;
 @ControllerAdvice
 public class JsonResponseBodyAdvice implements ResponseBodyAdvice {
     public boolean supports(MethodParameter methodParameter, Class aClass) {
-        System.out.println("###check supports");
+        System.out.println("###JsonResponseBodyAdvice - supports()");
         return true;
     }
 
@@ -27,26 +28,10 @@ public class JsonResponseBodyAdvice implements ResponseBodyAdvice {
         System.out.println("###JsonResponseBodyAdvice - beforeBodyWrite()");
         HttpHeaders headers = serverHttpRequest.getHeaders();
         if(headers != null && headers.get("client-type").contains("IOS")){
-            Map<String, Object> map = new HashMap<String, Object>();
-            Field[] fields = o.getClass().getDeclaredFields();
-            for(Field field : fields){
-                Object val = null;
-                try {
-                    field.setAccessible(true);
-                    val = field.get(o);
-/*                    Method method = o.getClass().getMethod(String.format("get%s%s",
-                            field.getName().substring(0, 1).toUpperCase(), field.getName().substring(1)));
-                    val = method.invoke(o);*/
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                }
-                if (val instanceof Float || val instanceof Double|| val instanceof BigDecimal){
-                    val = val.toString();
-                }
-                map.put(field.getName(), val);
-            }
-            o = map;
+//            o = DataFilter.filter(o);
         }
         return o;
     }
+
+
 }

@@ -67,4 +67,18 @@
 
     <!--<bean class="org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator" />-->
 
+    <bean id="aopAdvice" class="com.dinner3000.demo.respbody.advice.DefaultControllerAOPAdvice"/>
+
+    <aop:aspectj-autoproxy proxy-target-class="true"></aop:aspectj-autoproxy>
+
+    <aop:config>
+        <aop:pointcut id="target" expression="execution(* com.dinner3000.demo.respbody.controller..*(..))"></aop:pointcut>
+        <aop:aspect id="" ref="aopAdvice">
+            <aop:before method="before" pointcut-ref="target"></aop:before>
+            <aop:after method="after" pointcut-ref="target"></aop:after>
+            <aop:around method="around" pointcut-ref="target"></aop:around>
+            <aop:after-returning method="afterReturning" pointcut-ref="target" returning="retVal"></aop:after-returning>
+        </aop:aspect>
+    </aop:config>
 </beans>
+
