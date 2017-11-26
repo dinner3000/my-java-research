@@ -1,6 +1,7 @@
-package com.dinner3000.demo.respbody.advice;
+package com.dinner3000.demo.respbody.helper;
 
-import com.dinner3000.demo.respbody.model.Info;
+import com.dinner3000.demo.respbody.helper.IOSSpecificProcessor;
+import com.dinner3000.demo.respbody.helper.IOSSpecificProcessFlag;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -8,14 +9,6 @@ import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
-
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.util.HashMap;
-import java.util.Map;
 
 @ControllerAdvice
 public class JsonResponseBodyAdvice implements ResponseBodyAdvice {
@@ -28,7 +21,13 @@ public class JsonResponseBodyAdvice implements ResponseBodyAdvice {
         System.out.println("###JsonResponseBodyAdvice - beforeBodyWrite()");
         HttpHeaders headers = serverHttpRequest.getHeaders();
         if(headers != null && headers.get("client-type").contains("IOS")){
-//            o = DataFilter.filter(o);
+            if(!IOSSpecificProcessFlag.get()) {
+                o = IOSSpecificProcessor.process(o);
+                IOSSpecificProcessFlag.set(true);
+                System.out.println("IOS float data just processed");
+            } else{
+                System.out.println("IOS float data already processed, skip");
+            }
         }
         return o;
     }

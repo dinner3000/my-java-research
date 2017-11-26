@@ -38,14 +38,14 @@
         <!--对特定的请求进行拦截-->
         <mvc:interceptor>
             <mvc:mapping path="/*"/>
-            <bean class="com.dinner3000.demo.respbody.advice.DefaultControllerInterceptor"/>
+            <bean class="com.dinner3000.demo.respbody.interceptor.IOSSpecificProcessInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
 
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
 <!--        <property name="interceptors">
             <list>
-                <bean class="com.dinner3000.demo.respbody.advice.DefaultControllerInterceptor"/>
+                <bean class="com.dinner3000.demo.respbody.interceptor.IOSSpecificProcessInterceptorr"/>
             </list>
         </property>-->
     </bean>
@@ -60,14 +60,14 @@
 
         <property name="responseBodyAdvice">
             <list>
-                <bean class="com.dinner3000.demo.respbody.advice.JsonResponseBodyAdvice"/>
+                <bean class="com.dinner3000.demo.respbody.helper.JsonResponseBodyAdvice"/>
             </list>
         </property>
     </bean>
 
     <!--<bean class="org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator" />-->
 
-    <bean id="aopAdvice" class="com.dinner3000.demo.respbody.advice.DefaultControllerAOPAdvice"/>
+    <bean id="aopAdvice" class="com.dinner3000.demo.respbody.advice.ControllerAdvice"/>
 
     <aop:aspectj-autoproxy proxy-target-class="true"></aop:aspectj-autoproxy>
 

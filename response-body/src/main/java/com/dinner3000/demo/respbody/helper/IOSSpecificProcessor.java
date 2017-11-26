@@ -5,8 +5,8 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DataFilter {
-    public static Map<String, Object> filter(Object o){
+public class IOSSpecificProcessor {
+    public static Map<String, Object> process(Object o){
         Map<String, Object> map = new HashMap<String, Object>();
         Field[] fields = o.getClass().getDeclaredFields();
         for(Field field : fields){
