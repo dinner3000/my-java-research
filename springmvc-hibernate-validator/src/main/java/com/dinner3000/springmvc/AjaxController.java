@@ -5,15 +5,13 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.constraints.NotNull;
-
-@Validated
 @RestController
 @RequestMapping("/")
+@Validated
 public class AjaxController {
 
     @RequestMapping("index")
-    public Object index(@NotNull @NotEmpty String id){
+    public Object index(@NotEmpty String id){
         return "Ok";
     }
 }
