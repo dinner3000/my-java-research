@@ -60,5 +60,8 @@
         <module>response-body</module>
         <module>timer</module>
         <module>hibernate-validator</module>
+        <module>shiro</module>
+        <module>oom-test</module>
+        <module>multithread</module>
     </modules>
 </project>
