@@ -1,4 +1,4 @@
-package com.dinner3000.demo;
+package com.dinner3000.demo.locks;
 
 import java.util.ArrayList;
 import java.util.List;
